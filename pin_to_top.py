@@ -11,13 +11,13 @@ def update_pinned_articles(generator):
     new_order = [] 
     # count articles and keep the pinned ordered by date
     pinned = 0; 
-    for article in generator.articles:
+    for article in generator.context['articles']:
         if hasattr(article,'pin'): 
             new_order.insert(pinned,article)
             pinned += 1 
         else: 
             new_order.append(article)
-    generator.articles = new_order
+    generator.context['articles'] = new_order
 
 def register():
     signals.article_generator_finalized.connect(update_pinned_articles)
